@@ -3,6 +3,7 @@ package com.estoqueplus.controller;
 import com.estoqueplus.model.Produto;
 import com.estoqueplus.service.ProdutoService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,11 @@ public class ProdutoController {
     @GetMapping
     public List<Produto> listarProdutos() {
         return produtoService.listarProdutos();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity buscarProdutoPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(produtoService.buscarProdutoPorId(id));
     }
 
     @PostMapping
