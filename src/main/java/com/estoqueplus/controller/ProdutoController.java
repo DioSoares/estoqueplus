@@ -2,9 +2,7 @@ package com.estoqueplus.controller;
 
 import com.estoqueplus.model.Produto;
 import com.estoqueplus.service.ProdutoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,10 @@ public class ProdutoController {
     @GetMapping
     public List<Produto> listarProdutos() {
         return produtoService.listarProdutos();
+    }
+
+    @PostMapping
+    public Produto cadastrarProduto(@RequestBody Produto produto) {
+        return produtoService.salvarProduto(produto);
     }
 }
