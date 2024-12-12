@@ -2,6 +2,7 @@ package com.estoqueplus.controller;
 
 import com.estoqueplus.model.Produto;
 import com.estoqueplus.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public Produto cadastrarProduto(@RequestBody Produto produto) {
+    public Produto cadastrarProduto(@RequestBody @Valid Produto produto) {
         return produtoService.salvarProduto(produto);
     }
 }
