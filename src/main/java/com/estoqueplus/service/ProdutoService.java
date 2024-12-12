@@ -29,4 +29,15 @@ public class ProdutoService {
     public Produto salvarProduto(Produto produto) {
         return produtoRepository.save(produto);
     }
+
+    public Produto atualizarProduto(Long id, Produto produtoAtualizado) {
+        Produto produtoExistente = produtoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + id));
+
+                produtoExistente.setNome(produtoAtualizado.getNome());
+                produtoExistente.setQuantidade(produtoAtualizado.getQuantidade());
+                produtoExistente.setPreco(produtoAtualizado.getPreco());
+
+                return produtoRepository.save(produtoExistente);
+    }
 }

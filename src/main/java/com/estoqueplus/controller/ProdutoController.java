@@ -32,4 +32,9 @@ public class ProdutoController {
     public Produto cadastrarProduto(@RequestBody @Valid Produto produto) {
         return produtoService.salvarProduto(produto);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody @Valid Produto produtoAtualizado) {
+        return ResponseEntity.ok(produtoService.atualizarProduto(id, produtoAtualizado));
+    }
 }
