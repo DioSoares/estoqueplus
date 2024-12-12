@@ -37,4 +37,10 @@ public class ProdutoController {
     public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody @Valid Produto produtoAtualizado) {
         return ResponseEntity.ok(produtoService.atualizarProduto(id, produtoAtualizado));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirProduto(@PathVariable Long id) {
+        produtoService.excluirProduto(id);
+        return ResponseEntity.noContent().build();
+    }
 }

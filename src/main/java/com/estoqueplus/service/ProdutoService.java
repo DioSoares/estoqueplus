@@ -40,4 +40,10 @@ public class ProdutoService {
 
                 return produtoRepository.save(produtoExistente);
     }
+
+    public void excluirProduto(Long id) {
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado com ID: " + id));
+        produtoRepository.delete(produto);
+    }
 }
