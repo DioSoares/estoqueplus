@@ -25,6 +25,20 @@ public class Produto {
     private Double preco;
 
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+
+
     public Produto () {}
 
     public Produto(String nome, Integer quantidade, Double preco) {

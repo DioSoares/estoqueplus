@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 public class EstoquePlusApplication {
 
 	public static void main(String[] args) {
+
+
 		SpringApplication.run(EstoquePlusApplication.class, args);
 	}
 
