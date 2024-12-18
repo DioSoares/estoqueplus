@@ -34,7 +34,6 @@ build/
 
 ### Ignorar configurações sensíveis ###
 src/main/resources/application.properties
-src/main/resources/application.yml
 
 
 ### Ignorar arquivos de IDEs ###

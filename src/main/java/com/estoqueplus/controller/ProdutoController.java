@@ -1,5 +1,6 @@
 package com.estoqueplus.controller;
 
+import com.estoqueplus.dto.ProdutoDTO;
 import com.estoqueplus.model.Produto;
 import com.estoqueplus.service.ProdutoService;
 import jakarta.validation.Valid;
@@ -19,23 +20,27 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<Produto> listarProdutos() {
-        return produtoService.listarProdutos();
+    public ResponseEntity<List<ProdutoDTO>> listarProdutos() {
+        List<ProdutoDTO> produtos = produtoService.listarProdutos();
+        return ResponseEntity.ok(produtos);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity buscarProdutoPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(produtoService.buscarProdutoPorId(id));
+    public ResponseEntity<ProdutoDTO> buscarProdutoPorId(@PathVariable Long id) {
+        ProdutoDTO produto = produtoService.buscarProdutoPorId(id);
+        return ResponseEntity.ok(produto);
     }
 
     @PostMapping
-    public Produto cadastrarProduto(@RequestBody @Valid Produto produto) {
-        return produtoService.salvarProduto(produto);
+    public ResponseEntity<ProdutoDTO> cadastrarProduto(@RequestBody Produto produto) {
+        ProdutoDTO produtoSalvo = produtoService.salvarProduto(produto);
+        return  ResponseEntity.ok(produtoSalvo);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody @Valid Produto produtoAtualizado) {
-        return ResponseEntity.ok(produtoService.atualizarProduto(id, produtoAtualizado));
+        ProdutoDTO produtoAtualizadoDTO =produtoService.atualizarProduto(id, produtoAtualizado);
+        return ResponseEntity.ok(produtoAtualizado);
     }
 
     @DeleteMapping("/{id}")

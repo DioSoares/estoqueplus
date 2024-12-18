@@ -1,5 +1,6 @@
 package com.estoqueplus.controller;
 
+import com.estoqueplus.dto.CategoriaDTO;
 import com.estoqueplus.model.Categoria;
 import com.estoqueplus.service.CategoriaService;
 import org.springframework.http.HttpStatus;
@@ -19,26 +20,32 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> listarCategorias() {
-        List<Categoria> categorias = categoriaService.listarTodasCategorias();
-        return new ResponseEntity<>(categorias, HttpStatus.OK);
+    public ResponseEntity<List<CategoriaDTO>> listarCategorias() {
+        List<CategoriaDTO> categorias = categoriaService.listarTodasCategorias();
+        return ResponseEntity.ok(categorias);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> buscarCategoriaPorId(@PathVariable Long id) {
-        Categoria categoria = categoriaService.buscarCategoriaPorId(id);
-        return new ResponseEntity<>(categoria, HttpStatus.OK);
+    public ResponseEntity<CategoriaDTO> buscarCategoriaPorId(@PathVariable Long id) {
+        CategoriaDTO categoria = categoriaService.buscarCategoriaPorId(id);
+        return ResponseEntity.ok(categoria);
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> criarCategoria(@RequestBody Categoria categoria) {
-        Categoria novaCategoria = categoriaService.salvarCategoria(categoria);
-        return new ResponseEntity<>(novaCategoria, HttpStatus.CREATED);
+    public ResponseEntity<CategoriaDTO> criarCategoria(@RequestBody Categoria categoria){
+        CategoriaDTO novaCategoria = categoriaService.salvarCategoria(categoria);
+        return ResponseEntity.ok(novaCategoria);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoriaDTO> atualizarCategoria(@PathVariable Long id, @RequestBody Categoria categoriaAtualizada) {
+        CategoriaDTO categoriaAtualizadaDTO = categoriaService.atualizarCategoria(id, categoriaAtualizada);
+        return ResponseEntity.ok(categoriaAtualizadaDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarCategoria(@PathVariable Long id) {
         categoriaService.deletarCategoria(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }
